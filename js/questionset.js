@@ -78,6 +78,13 @@ H5P.QuestionSet = function (options, contentId, contentData) {
           '  <div class="buttons"><a href="#" class="qs-startbutton h5p-joubelui-button h5p-button"><%= introPage.startButtonText %></a></div>' +
           '</div>' +
           '<% } %>' +
+          //F0
+          '<% if (progressType == "bar") { %>' +
+          '<div class="bar-container">' +
+          '  <div class="progress-bar-answers"></div>' +
+          '</div>' +
+          '<% } %>' +
+          //End F0
           '<div tabindex="-1" class="qs-progress-announcer"></div>' +
           '<div class="questionset<% if (introPage.showIntroPage) { %> hidden<% } %>">' +
           '  <% for (var i=0; i<questions.length; i++) { %>' +
@@ -280,6 +287,7 @@ H5P.QuestionSet = function (options, contentId, contentData) {
 
       question.params = question.params || {};
       var hasAnswers = contentData.previousState && contentData.previousState.answers;
+//console.log(question);
       var questionInstance = H5P.newRunnable(question, contentId, undefined, undefined,
         {
           previousState: hasAnswers ? contentData.previousState.answers[i] : undefined,
@@ -382,6 +390,10 @@ H5P.QuestionSet = function (options, contentId, contentData) {
     // Test if current has been answered.
     if (params.progressType === 'textual') {
       $('.progress-text', $myDom).text(params.texts.textualProgress.replace("@current", questionNumber+1).replace("@total", params.questions.length));
+    }
+    else if (params.progressType === 'bar') {
+        var newWidth = ((currentQuestion + 1) * 100) / questionInstances.length;
+        $('.progress-bar-answers').css('width',newWidth+'%');
     }
     else {
       // Set currentNess

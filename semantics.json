@@ -82,6 +82,10 @@
       {
         "value": "dots",
         "label": "Dots"
+      },
+      {
+        "value": "bar",
+        "label": "Bar"
       }
     ],
     "default": "dots"
@@ -121,6 +125,7 @@
       "importance": "high",
       "description": "Library for this question.",
       "options": [
+        "H5P.InteractiveVideo 1.20",
         "H5P.MultiChoice 1.13",
         "H5P.DragQuestion 1.13",
         "H5P.Blanks 1.11",
